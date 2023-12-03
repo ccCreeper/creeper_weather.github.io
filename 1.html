@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>事件时间线</title>
+    <style>
+        .timeline-item {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .timeline-content {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .timeline-text {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>事件时间线</h1>
+    <div id="timeline"></div>
+    <form id="eventForm">
+        <label for="date">日期:</label><br>
+        <input type="text" id="date" name="date"><br>
+        <label for="description">描述:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <label for="text">文本:</label><br>
+        <input type="text" id="text" name="text"><br>
+        <input type="submit" value="添加事件">
+    </form>
+    <script>
+        var events = [
+            { date: '2023-03-15', description: '事件1', text: '这是事件1的详细描述。' },
+            { date: '2023-03-16', description: '事件2', text: '这是事件2的详细描述。' },
+            { date: '2023-03-17', description: '事件3', text: '这是事件3的详细描述。' },
+            { date: '2023-03-18', description: '事件4', text: '这是事件4的详细描述。' },
+        ];
+
+        // 确保文档加载完成后才执行JavaScript代码
+        document.addEventListener('DOMContentLoaded', function() {
+            var timeline = document.getElementById('timeline');
+            for (var i = 0; i < events.length; i++) {
+                var event = events[i];
+                var item = document.createElement('div');
+                item.classList.add('timeline-item');
+                var content = document.createElement('div');
+                content.classList.add('timeline-content');
+                content.textContent = event.date + ': ' + event.description;
+                item.appendChild(content);
+                var textContent = document.createElement('div');
+                textContent.classList.add('timeline-text');
+                textContent.textContent = event.text;
+                item.appendChild(textContent);
+                timeline.appendChild(item);
+            }
+
+            // 添加点击事件监听器到每个时间线项
+            var timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    // 切换文本的显示状态
+                    var textContent = this.querySelector('.timeline-text');
+                    if (textContent) {
+                        if (textContent.style.display === 'none') {
+                            textContent.style.display = 'block';
+                        } else {
+                            textContent.style.display = 'none';
+                        }
+                    } else {
+                        alert('您点击了事件，但此事件没有提供详细描述。');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
