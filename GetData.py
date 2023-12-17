@@ -3,8 +3,8 @@ import pandas as pd
 import datetime
 import io
 '''
- 使用python爬虫技术,爬取青岛和全国的天气信息数据
- 爬取网站：http://tianqi.2345.com/wea_history/54161.htm
+ 使用python爬虫技术,爬取即墨和全国的天气信息数据
+ 爬取网站：http://tianqi.2345.com/wea_history/60209.htm
  areaid 和各省会城市对应关系
  area_id = [
     ("黑龙江", 50953), ("内蒙古", 53463),("吉林", 54161), ("辽宁", 54342),
@@ -14,7 +14,8 @@ import io
     ("河南", 57083), ("江苏",58238 ), ("安徽", 58321), ("湖北", 57494),
     ("浙江", 58457), ("福建",58847 ), ("江西", 58606), ("湖南",57687 ),
     ("贵州",57816 ), ("广西", 59431), ("海南",59758 ), ("上海",58362 ),
-     ("广东",59287),  ("云南",56778), ("台湾",59554) 
+     ("广东",59287),  ("云南",56778), ("台湾",59554) , ("北京",54511) , 
+     ("香港",45007) , ("澳门",45011) 
 ]
  
 '''
@@ -41,13 +42,13 @@ def craw_table(id,year,month):
     return df
 
 
-# 输入城市id，爬取该城市今日的天气数据
+# 输入城市id，爬取该城市昨日的天气数据
 def getToday(id):
     # 获取当前年份和月份
     today = datetime.datetime.today()
     year = today.year
     month = today.month
-    # 获取当日青岛天气数据
+    # 获取当日即墨天气数据
     month_data =craw_table(id, year, month)
     return month_data.tail(1)
 
@@ -57,15 +58,15 @@ def getWeek(id):
     today = datetime.datetime.today()
     year = today.year
     month = today.month
-    # 获取当日青岛天气数据
+    # 获取当日即墨天气数据
     month_data =craw_table(id, year, month)
     return month_data.tail(7)
 
-# 爬取全国各个省会城市的今日的天气数据
+# 爬取全国各个省会城市的昨日的天气数据
 def getChinaToday():
     ids=[50953, 53463,54161,54342,53698,54527,53772,57036 ,52889,53614,52866,51463,
           55591, 56294, 57516,54823,57083,58238, 58321, 57494, 58457,58847,58606,
-          57687,57816 ,59431,59758 ,58362 ,59287,56778,59554]
+          57687,57816 ,59431,59758 ,58362 ,59287,56778,59554,54511,45007,45011]
     list=[]
     for i in ids:
         df=getToday(i)
@@ -122,7 +123,3 @@ def craw_year(year1, year2):
 #date =df["最高温"]
 #print(date)
 '''
-
-
-
-
