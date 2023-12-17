@@ -105,7 +105,7 @@ def write(years, b,c):
     #print(week_ago.year-years[0],week_ago.month,week_ago.day)
     #print(week_pre.year-years[1],week_pre.month,week_pre.day)
     # 爬取数据
-    id =54161
+    id = 60209
     # 取到预处理后的用来预测的数据
     date0 = GetData.getPredictDate(week_ago.year-years[0],week_ago.month,week_ago.day,week_pre.year-years[1],week_pre.month,week_pre.day)
     date_=process(date0).set_index("日期")
@@ -130,8 +130,8 @@ def ProcessData():
         imputed_X_test 预测数据集]
     """
     # 写入csv
-    write([1,1], [14, 0], "date_train.csv")
-    write([1,1],  [0, 14], "date_valid.csv")
+    write([2,2], [14, 0], "date_train.csv")
+    write([2,2],  [0, 14], "date_valid.csv")
     write([0,0], [14, 0], "date_test.csv")
 
     X_test = pd.read_csv("date_test.csv", index_col="日期", parse_dates=True, date_format='%Y-%m-%d')
